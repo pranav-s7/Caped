@@ -9,7 +9,7 @@ module.exports = {
 
     execute(message, args) {
         const Discord = require("discord.js");
-        const Storage = require('../models/paintstorage')
+        const Storage = require('../Library/paintstorage')
 
         let grant = Math.floor(Math.random() * (40 - 10) + 10);
 

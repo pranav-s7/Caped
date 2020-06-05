@@ -9,7 +9,7 @@ module.exports = {
 
     execute(message, args) {
         const Discord = require("discord.js");
-        const PaintStorage = require("../models/paintstorage");
+        const PaintStorage = require("../Library/paintstorage");
 
         let paintEmbed = new Discord.MessageEmbed()
             .setColor("RANDOM")
