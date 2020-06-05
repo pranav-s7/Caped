@@ -1,4 +1,5 @@
-require('dotenv').config();
+const ENV = require('dotenv');
+ENV.config();
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -7,7 +8,6 @@ const prefix = "!"
 client.commands = new Discord.Collection();
 const mongoose = require("mongoose");
 const cooldowns = new Discord.Collection()
-const token = require('./Library/tokenenv.json')
 
 mongoose.connect('mongodb+srv://admin:Geronimo8!@caped-wetgx.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true
@@ -119,7 +119,6 @@ client.on("message", async message => {
         }
     }
 });
-
-client.login(process.env.token);
+client.login(process.env.BOT_TOKEN);
 
 ////////////////////////////////////////////////////////////////////////////////////////////
