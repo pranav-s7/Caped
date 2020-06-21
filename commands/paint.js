@@ -15,6 +15,8 @@ module.exports = {
 
         let hourlyPaint = async function () {
 
+            message.channel.startTyping();
+
             await Storage.findOne({
                 userID: message.author.id
             }, (err, store) => {
@@ -41,6 +43,8 @@ module.exports = {
             let store1 = await Storage.findOne({
                 userID: message.author.id
             })
+
+            message.channel.stopTyping();
 
             let hourlyEmbed = new Discord.MessageEmbed()
                 .setTitle("Caped Paint")

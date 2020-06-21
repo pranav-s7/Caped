@@ -4,12 +4,15 @@ module.exports = {
     cooldown: 10,
     args: false,
     aliases: ["s", "bal"],
-    type: "stats",
+    type: "economy",
     usage: "bal <user>",
 
     execute(message, args) {
+
         const Discord = require("discord.js");
         const PaintStorage = require("../Library/paintstorage");
+
+        message.channel.startTyping();
 
         let paintEmbed = new Discord.MessageEmbed()
             .setColor("RANDOM")
@@ -48,6 +51,9 @@ module.exports = {
                                 " Total paint acquired: " + `\n\n**${res.paint}**` + " litres of paint"
                             );
                         }
+
+                        message.channel.stopTyping()
+
                         message.channel.send(paintEmbed);
                     }
                 );
