@@ -45,7 +45,7 @@ module.exports = {
                             );
                         } else {
                             paintEmbed.setDescription(
-                                " Total paint acquired: " + `\n\n**${res.paint}**` + " paint"
+                                " Total paint acquired: " + `\n\n**${res.paint}**` + " litres of paint"
                             );
                         }
                         message.channel.send(paintEmbed);

@@ -93,11 +93,24 @@ client.on("message", async message => {
             if (now < expiredTime) {
                 const timeLeft = (expiredTime - now) / 1000;
 
-                let minutes = Math.round(timeLeft / 60)
-
                 let coolembed = new Discord.MessageEmbed()
-                    .setColor(`#e62222`)
-                    .setDescription(`Wait ${minutes} minutes before running this command again :)`)
+                coolembed.setColor(`#e62222`)
+
+
+
+                if (timeLeft > 60) {
+
+                    let left = Math.round(timeLeft / 60)
+                    coolembed.setDescription(`Wait ${left} minute(s) before running this command again :)`)
+
+
+                } else {
+
+                    let left = Math.round(timeLeft)
+                    coolembed.setDescription(`Wait ${left} second(s) before running this command again :)`)
+
+                }
+
                 return message.channel.send(coolembed);
 
             }
