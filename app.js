@@ -4,7 +4,7 @@ ENV.config();
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-const prefix = "!"
+const prefix = "cc"
 client.commands = new Discord.Collection();
 const mongoose = require("mongoose");
 const cooldowns = new Discord.Collection()
@@ -34,7 +34,7 @@ for (const file of commandFiles) {
 
 client.once("ready", async () => {
     console.log("Caped is ready to rock :)");
-    client.user.setActivity(`${prefix}help to start`, {
+    client.user.setActivity(`${prefix} help to start`, {
         type: "PLAYING"
     });
 });
@@ -45,7 +45,7 @@ client.on("message", async message => {
     if (message.author.bot || message.channel.type === "dm") return;
 
 
-    let args = message.content.slice(prefix.length).split(/ +/);
+    let args = message.content.slice(prefix.length + 1).split(/ +/);
     let commandName = args.shift().toLowerCase();
     const command =
         client.commands.get(commandName) ||
@@ -58,16 +58,31 @@ client.on("message", async message => {
 
     // Calling Commands [Start]
 
+    let errorEmbed = new Discord.MessageEmbed()
+        .setColor('RED')
+
     if (message.content.startsWith(prefix)) {
-        if (command.args && !args.length && !command.usage) {
-            return Embeds.invalid(message);
+
+        if ((command.args && !args.length && !command.usage) || (!command.args && args.length > 0)) {
+
+            errorEmbed.addField("**~ Invalid Usage of Command ~**", "Join the support server for Caped! [Click here](https://discord.gg/xyAaUXu)")
+
+            return message.channel.send(errorEmbed)
+
         } else if (command.usage && command.args && !args.length) {
-            return Embeds.correctUsage(message, command.usage);
+
+            errorEmbed.addField(`**~ Invalid ~** Correct Usage Is ${command.usage}`, "Join the support server for Caped! [Click here](https://discord.gg/xyAaUXu)")
+
+            return message.channel.send(errorEmbed);
+
         } else if (
+
             command.type == "moderation" &&
+
             !message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")
+
         ) {
-            return Embeds.noPerms(message);
+            return;
         }
     }
 

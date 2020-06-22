@@ -4,7 +4,7 @@ module.exports = {
     cooldown: 5,
     args: false,
     aliases: [''],
-    type: "help",
+    type: "Assistance",
     usage: "support",
 
     execute(message, args) {
