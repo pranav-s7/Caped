@@ -1,10 +1,10 @@
 module.exports = {
     name: "storage",
     description: "View your paint",
-    cooldown: 10,
+    cooldown: 5,
     args: false,
     aliases: ["s", "bal"],
-    type: "economy",
+    type: "Economy",
     usage: "bal <user>",
 
     execute(message, args) {
@@ -15,21 +15,14 @@ module.exports = {
         message.channel.startTyping();
 
         let paintEmbed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
-            .setFooter("Stay active to level up", message.client.avatarURL);
+            .setColor("BLURPLE")
 
         if (args.length === 0) { // Get your own balance
             var findID = message.author.id;
 
-            paintEmbed.setThumbnail(message.author.avatarURL);
-            paintEmbed.setTitle(message.author.username);
-
         } else if (args.length === 1) { // Get another members balance
             let paintUser = message.mentions.users.first();
             if (!paintUser) message.channel.send("Tagged user not found")
-
-            paintEmbed.setThumbnail(paintUser.avatarURL);
-            paintEmbed.setTitle(paintUser.username);
 
             findID = paintUser.id;
         }
@@ -43,13 +36,12 @@ module.exports = {
                         if (err) return console.log(err);
 
                         if (!res) {
-                            paintEmbed.setDescription(
-                                "Couldn't find anything here \n\n **Emptiness**" //  --> Member hasn't sent a  message (0 credits)
+                            paintEmbed.setFooter(
+                                "Couldn't find anything here, much emptiness", 'https://i.imgur.com/bQN25fW.png'
                             );
+                            paintEmbed.setColor('BLURPLE')
                         } else {
-                            paintEmbed.setDescription(
-                                " Total paint acquired: " + `\n\n**${res.paint}**` + " litres of paint"
-                            );
+                            paintEmbed.setFooter(`You currently have ${res.paint}ml of paint stored`, 'https://i.imgur.com/bQN25fW.png');
                         }
 
                         message.channel.stopTyping()

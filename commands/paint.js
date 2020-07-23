@@ -1,10 +1,10 @@
 module.exports = {
     name: "paint",
     description: "Paint every hour",
-    cooldown: 3600,
+    cooldown: 600,
     args: false,
     aliases: ['p'],
-    type: "economy",
+    type: "Economy",
     usage: "paint",
 
     execute(message, args) {
@@ -25,7 +25,8 @@ module.exports = {
                 if (!store) {
                     const newStorage = Storage({
                         userID: message.author.id,
-                        paint: grant
+                        paint: grant,
+                        serverID: message.guild.id
                     })
 
                     newStorage.save().catch(err => {
@@ -38,22 +39,19 @@ module.exports = {
                         console.log(err)
                     })
                 }
+
+                message.channel.stopTyping();
+
+                let hourlyEmbed = new Discord.MessageEmbed()
+                    .setColor("BLURPLE")
+                    .setFooter(`You have accumulated ${grant}ml of paint`, 'https://i.imgur.com/0pKEDL2.png')
+
+                message.channel.send(hourlyEmbed);
+
+
             })
 
-            let store1 = await Storage.findOne({
-                userID: message.author.id
-            })
 
-            message.channel.stopTyping();
-
-            let hourlyEmbed = new Discord.MessageEmbed()
-                .setTitle("Caped Paint")
-                .setColor("BLUE")
-                .setDescription(`You have accumulated **${grant}ml** of paint`)
-                .addField(`Paint Storage:`, `You have **${store1.paint}ml** of paint`)
-                .setFooter("CapedCafe#7429")
-
-            message.channel.send(hourlyEmbed);
 
         }
 

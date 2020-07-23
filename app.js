@@ -59,11 +59,11 @@ client.on("message", async message => {
     // Calling Commands [Start]
 
     let errorEmbed = new Discord.MessageEmbed()
-        .setColor('RED')
+        .setColor('BLURPLE')
 
     if (message.content.startsWith(prefix)) {
 
-        if ((command.args && !args.length && !command.usage) || (!command.args && args.length > 0)) {
+        if (command.args && !args.length && !command.usage) {
 
             errorEmbed.addField("**~ Invalid Usage of Command ~**", "Join the support server for Caped! [Click here](https://discord.gg/xyAaUXu)")
 
@@ -109,20 +109,20 @@ client.on("message", async message => {
                 const timeLeft = (expiredTime - now) / 1000;
 
                 let coolembed = new Discord.MessageEmbed()
-                coolembed.setColor(`#e62222`)
+                coolembed.setColor(`BLURPLE`)
 
 
 
                 if (timeLeft > 60) {
 
                     let left = Math.round(timeLeft / 60)
-                    coolembed.setDescription(`Wait ${left} minute(s) before running this command again :)`)
+                    coolembed.setFooter(`Wait ${left} minute(s) before running this command again`, `https://i.imgur.com/uKWqKLi.png`)
 
 
                 } else {
 
                     let left = Math.round(timeLeft)
-                    coolembed.setDescription(`Wait ${left} second(s) before running this command again :)`)
+                    coolembed.setFooter(`Wait ${left} second(s) before running this command again`, `https://i.imgur.com/uKWqKLi.png`)
 
                 }
 

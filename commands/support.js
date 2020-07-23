@@ -3,7 +3,6 @@ module.exports = {
     description: "To report bugs or further help for Caped",
     cooldown: 5,
     args: false,
-    aliases: [''],
     type: "Assistance",
     usage: "support",
 
@@ -11,7 +10,7 @@ module.exports = {
         const Discord = require("discord.js");
 
         let support = new Discord.MessageEmbed()
-            .setColor('#00ff80')
+            .setColor('BLURPLE')
             .addField("**~ Support or Suggestions ~**", "Join the support server for Caped! [Click here](https://discord.gg/xyAaUXu)")
 
         message.channel.send(support)

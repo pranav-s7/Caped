@@ -8,6 +8,7 @@ module.exports = {
 
     execute(message, args) {
         const Discord = require("discord.js");
+        const prefix = "cc";
 
         let {
             commands
@@ -29,23 +30,23 @@ module.exports = {
 
             helpEmbed.setTitle("List of Available Commands!");
             helpEmbed.setDescription(`cc help [command name] for detailed info`);
-            helpEmbed.setColor("RANDOM");
+            helpEmbed.setColor("BLURPLE");
 
             return message.channel.send(helpEmbed);
         }
 
-        let helpComand = args[0].toLowerCase();
+        let helpCommand = args[0].toLowerCase();
         const command = commands.get(helpCommand) || commands.find(c => c.aliases && c.aliases.includes(helpCommand))
 
         if (!command) {
             let inalid = new Discord.MessageEmbed()
-                .setColor('RED')
+                .setColor('BLURPLE')
                 .addField("**~ Command Not Found ~**", "Join the support server for Caped! [Click here](https://discord.gg/xyAaUXu)")
             return message.channel.send(invalid)
         }
 
         let specific = new Discord.MessageEmbed()
-            .setColor('RANDOM')
+            .setColor('BLURPLE')
             .setTitle(`Command: ${command.name}`)
             .setDescription(command.description);
 
@@ -56,7 +57,8 @@ module.exports = {
             );
         } else specific.setFooter("Aliases: None", message.author.avatarURL);
 
-        if (command.usage) specific.addField("Usage", prefix + command.usage);
+        if (command.usage) specific.addField("Usage", prefix + " " +
+            command.usage);
 
         message.channel.send(specific); // --> Help on a specific command 
 
